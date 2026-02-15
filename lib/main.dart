@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/pages/WelcomePage.dart';
+import 'package:newsapp/pages/crudop.dart';
 import 'package:newsapp/pages/newsPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
+      home: crudOp(),
     );
   }
 }

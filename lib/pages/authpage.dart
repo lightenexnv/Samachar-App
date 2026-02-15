@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/controllers/auth_controller.dart';
+import 'package:newsapp/pages/newsPage.dart';
+import 'package:newsapp/pages/phoneauthpage.dart';
 
 import 'WelcomePage.dart';
 
@@ -24,13 +26,15 @@ class _AuthPageState extends State<AuthPage> {
       );
 
       if (user != null && mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => WelcomePage()),
-        );
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (_) => newsPage()),
+                (route) => false,
+          );
+        });
       }
     } catch (e) {
-      print(e.toString());
+      debugPrint("Login error: $e");
     }
   }
 
@@ -42,13 +46,15 @@ class _AuthPageState extends State<AuthPage> {
       );
 
       if (user != null && mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => WelcomePage()),
-        );
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (_) => newsPage()),
+                (route) => false,
+          );
+        });
       }
     } catch (e) {
-      print(e.toString());
+      debugPrint("Signup error: $e");
     }
   }
 
@@ -69,7 +75,7 @@ class _AuthPageState extends State<AuthPage> {
                   IconButton(
                     alignment: Alignment.centerLeft,
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> WelcomePage())),
                   ),
                   const SizedBox(height: 40),
                   Container(
@@ -129,7 +135,19 @@ class _AuthPageState extends State<AuthPage> {
           _inputField("Email",controller: emailCtrl),
           const SizedBox(height: 16),
           _inputField("Password",controller: passCtrl ,isPasswordVisible: true),
-          const SizedBox(height: 30),
+          const SizedBox(height: 10),
+          Row(mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> phoneAuth()));
+                },
+                child: Text("Login With Phone Number",style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white
+                ),))
+          ],),
+          const SizedBox(height: 10),
           Hero(
             tag: 'auth-button',
             child: Material(

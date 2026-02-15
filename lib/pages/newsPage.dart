@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:newsapp/models/newsModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:newsapp/pages/WelcomePage.dart';
 import 'package:newsapp/pages/favouriteNews.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../controllers/auth_controller.dart';
 
 class newsPage extends StatefulWidget {
   const newsPage({super.key});
@@ -64,6 +67,7 @@ Future<void> refreshNews() async {
   }
 }
 
+  final controller = AuthController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +89,7 @@ Future<void> refreshNews() async {
               children: [
                 IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> WelcomePage()));
                   },
                   icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                 ),
@@ -120,6 +124,21 @@ Future<void> refreshNews() async {
                     },
                   icon: Hero(tag:'heart-tag',child: const Icon(Icons.favorite, color: Colors.red)),
                 ),
+                IconButton(
+                  onPressed: () async {
+                    await controller.logout();
+
+                    if (!mounted) return;
+
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => const WelcomePage()),
+                          (route) => false,
+                    );
+                  },
+                  icon: const Icon(Icons.logout, color: Colors.white),
+                ),
+
               ],
             ),
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "144079572703",
+    "project_id": "fir-lightenexnv",
+    "storage_bucket": "fir-lightenexnv.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144079572703:android:86eec478476a022025a36a",
+        "android_client_info": {
+          "package_name": "com.example.newsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBExrjaGXer5WZcVkKqKYctvOiWCL6M39w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

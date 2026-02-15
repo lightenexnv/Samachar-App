@@ -15,4 +15,17 @@ class AuthController {
   Future<void> logout() async {
     await _service.logout();
   }
+
+  Future<User?> phoneLogin(String phoneNumber, Function(String verificationId) onCodeSent) async{
+    return await _service.phoneLogin(phoneNumber, onCodeSent);
+  }
+
+  Future<User?> verifyOtp(
+      String verificationId,
+      String smsCode,
+      ) async {
+    return await _service.verifyOtp(verificationId, smsCode);
+  }
+
+  
 }

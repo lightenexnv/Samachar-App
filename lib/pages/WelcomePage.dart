@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:newsapp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:newsapp/pages/newsPage.dart';
+import 'package:newsapp/controllers/auth_controller.dart';
+import 'authpage.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -37,9 +40,16 @@ class WelcomePage extends StatelessWidget {
                 color: Colors.blue,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(30),
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> newsPage()));
-                  },
+                    onTap: () {
+                      final user = FirebaseAuth.instance.currentUser;
+
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => user == null ? const AuthPage() : const newsPage(),
+                        ),
+                      );
+                    },
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 40, vertical: 16),
